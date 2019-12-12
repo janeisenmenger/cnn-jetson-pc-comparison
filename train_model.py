@@ -52,7 +52,7 @@ def train(module_name):
     # print automatically
     model.summary()
 
-    # Let's train the model using RMSprop
+    # Let's train the model
     model.compile(loss=model_container.get_loss_function(),
               optimizer=model_container.get_optimizer(),
               metrics=['accuracy'])
@@ -65,14 +65,14 @@ def train(module_name):
         # directory already exists
         pass
 
-    improvement_file_format = improvement_dir + '/{epoch:02d}-{val_loss:.10f}.hdf5'
+    improvement_file_format = improvement_dir + '/{epoch:02d}-{acc:.10f}.hdf5'
     
     checkpoint = ModelCheckpoint(
         improvement_file_format, 
-        monitor='val_loss', 
+        monitor='acc', 
         verbose=1, 
         save_best_only=True, 
-        mode='min')
+        mode='max')
     callback_list = [checkpoint]
 
     # split training data 
