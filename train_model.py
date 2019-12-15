@@ -69,7 +69,7 @@ def train(module_name):
     
     checkpoint = ModelCheckpoint(
         improvement_file_format, 
-        monitor='acc', 
+        monitor='val_acc', 
         verbose=1, 
         save_best_only=True, 
         mode='max')
