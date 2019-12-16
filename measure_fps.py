@@ -19,7 +19,7 @@ def measure_fps(model_file):
     print("Start measuring fps.")
     start_time =time.time()
 
-    model.predict(input_data*5, batch_size=1)
+    model.predict(input_data, batch_size=1)
     end_time = time.time()
 
     time_spent = end_time - start_time
