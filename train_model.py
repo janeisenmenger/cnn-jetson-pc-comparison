@@ -65,7 +65,7 @@ def train(module_name):
         # directory already exists
         pass
 
-    improvement_file_format = improvement_dir + '/{epoch:02d}-{acc:.10f}.hdf5'
+    improvement_file_format = improvement_dir + '/{epoch:02d}-{val_acc:.10f}.hdf5'
     
     checkpoint = ModelCheckpoint(
         improvement_file_format, 
@@ -102,7 +102,7 @@ def train(module_name):
         validation_data=(test_input, test_expected_output), 
         callbacks=callback_list)
     
-    save_all_models()
+    save_model()
 
 def print_usage_and_exit():
     '''
@@ -111,7 +111,7 @@ def print_usage_and_exit():
     print('Usage: python train_model.py [-m/--module-name=] <module-containing-the-model> [-s/--save-model=] <where-to-save-the-model (dir)>')
     sys.exit(1)
 
-def save_all_models():
+def save_model():
     '''
     A function to save all models. The function has no parameters since it uses global variables.
     These have to be global in case this function is being called from the ctrl+c signal handler.
@@ -120,13 +120,14 @@ def save_all_models():
 
     end_time = time.time()
 
-    print('Saving all models')
+    print('Saving model')
 
     # The model might have trained further and worsened, therefore we need to load the best weights now.
     weight_files = helper.get_all_files_in_directory(improvement_dir, '.hdf5')
     latest_improvement = max(weight_files, key=os.path.getctime)
 
     model.load_weights(latest_improvement)
+
     try:
         os.makedirs(model_output)
     except FileExistsError:
@@ -159,7 +160,7 @@ def signal_handler(sig, frame):
     :param sig: Not used, here for compatability.
     :param frame: Not used, here for compatability.
     '''
-    save_all_models()
+    save_model()
     sys.exit(0)
 
 
@@ -196,7 +197,7 @@ if __name__ == "__main__":
 
     
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H:%M")
-    model_output = model_output + '/' + timestamp
+    model_output = model_output + '/' model_name + '/' + timestamp
 
     # run the training
     train(module_name, )
