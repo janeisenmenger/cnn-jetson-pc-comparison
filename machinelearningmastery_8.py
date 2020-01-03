@@ -29,7 +29,7 @@ class CNNModel(ModelTemplate):
         self.model.add(Dense(10, activation='softmax'))
     
     def get_epochs(self):
-        return 100
+        return 10
 
     def get_batch_size(self):
         return 8

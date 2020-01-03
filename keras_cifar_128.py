@@ -37,7 +37,7 @@ class CNNModel(ModelTemplate):
 
     
     def get_epochs(self):
-        return 100
+        return 10
 
     def get_batch_size(self):
         return 128
