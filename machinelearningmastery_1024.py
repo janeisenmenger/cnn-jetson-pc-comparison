@@ -32,7 +32,7 @@ class CNNModel(ModelTemplate):
         return 10
 
     def get_batch_size(self):
-        return 128
+        return 1024
     def get_optimizer(self):
         return keras.optimizers.SGD(lr=0.001, momentum=0.9)
 
