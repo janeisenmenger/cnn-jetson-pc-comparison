@@ -196,7 +196,7 @@ if __name__ == "__main__":
 
     
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H:%M")
-    model_output = model_output + '/' + timestamp
+    model_output = model_output + '/' + module_name + '/' + timestamp
 
     # run the training
     train(module_name, )
