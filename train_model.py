@@ -72,7 +72,7 @@ def train(module_name):
         monitor='val_loss', 
         verbose=1, 
         save_best_only=True, 
-        mode='max')
+        mode='min')
     callback_list = [checkpoint]
 
     # split training data 
